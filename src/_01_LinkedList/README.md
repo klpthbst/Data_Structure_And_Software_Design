@@ -11,5 +11,3 @@ This method removes all instances of the N largest values in the LinkedList. Bec
 ## containsSubsequence: 
 This method determines whether any part of the first LinkedList contains all elements of the second in the same order with no other elements in the sequence, i.e. it should return true if the second LinkedList is a subsequence of the first, and false if it is not. The method should return false if either input is null or empty.
 
-Please do not change the signatures of these three methods (their parameter lists, names, and return value types) and do not create any additional .java files for your solution. If you need additional classes, you can define them in LinkedListUtils.java. Additionally, please be sure that your LinkedListUtils class is in the default package, i.e. there is no “package” declaration at the top of the source code.
-
