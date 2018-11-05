@@ -16,4 +16,4 @@ OpenJDK 64-Bit Server VM (build 10.0.2+13-Ubuntu-1ubuntu0.18.04.3, mixed mode)
 
 
 ## Resourses
-[Data Structures and Software Design](https://www.edx.org/course/data-structures-software-design-pennx-sd2x) course.\
+[Data Structures and Software Design](https://www.edx.org/course/data-structures-software-design-pennx-sd2x) course.
