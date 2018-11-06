@@ -31,8 +31,8 @@ and, upon encountering a closing tag in the `Queue`, you would want to check tha
 `Example #2`: Closing tag with no opening tag
 `<html><body>Correct<br/><b>Sentence</b>here</div></body></html>`
 
-In this case, the first closing tag that you encounter `(</b> New Roman',serif; color: #222222; background: white;">)`does match its opening tag, but the next one `(</div>)` does not, so the expected output would be a `Stack` containing (going from bottom to top):
-<html><body>
+In this case, the first closing tag that you encounter `</b>`does match its opening tag, but the next one `</div>` does not, so the expected output would be a `Stack` containing (going from bottom to top):
+`<html><body>`
 
 Note that the `<br/>` tag is self-closing and should not be placed on the `Stack`!
 
