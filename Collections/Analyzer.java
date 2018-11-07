@@ -29,29 +29,29 @@ public class Analyzer {
 		try {
 			Scanner sc = new Scanner(file);
 			String line = null;
-		    while (sc.hasNextLine()) {
+		    	while (sc.hasNextLine()) {
 		    	line = sc.nextLine();
-		    	String []str;
-		        str = line.split(" ");
-		        if (str.length < 4)
-		        	continue; // no text or no score (less then 4 element in array) why? idk but its ok for tests -_-		        
-		        double score = Double.parseDouble(str[0]);
-		        StringBuilder text = new StringBuilder();
-		        if (Math.abs(score) == 0 || 
-		        	Math.abs(score) == 2 ||
-		        	Math.abs(score) == 1) { // check invalid sentences that have score that is not an integer (1.8)				    
-			    } else {
-			    	continue; //ignore any line that is not well-formatted. (starts with an int between -2 and 2 (inclusive))
-		        }
-		        for (int i = 1; i < str.length; i++) { // start from 1 (skip score at index 0)
-		        	text.append(str[i]);
-		        	if (i + 1 != str.length)
-		        		text.append(" ");
-		        }
-		        sentence = new Sentence((int) score, text.toString());
-		        list.add(sentence);		        
-		    }
-		    sc.close();    
+				String []str;
+				str = line.split(" ");
+				if (str.length < 4)
+					continue; // no text or no score (less then 4 element in array) why? idk but its ok for tests -_-		        
+				double score = Double.parseDouble(str[0]);
+				StringBuilder text = new StringBuilder();
+				if (Math.abs(score) == 0 || 
+					Math.abs(score) == 2 ||
+					Math.abs(score) == 1) { // check invalid sentences that have score that is not an integer (1.8)				    
+				    } else {
+					continue; //ignore any line that is not well-formatted. (starts with an int between -2 and 2 (inclusive))
+				}
+				for (int i = 1; i < str.length; i++) { // start from 1 (skip score at index 0)
+					text.append(str[i]);
+					if (i + 1 != str.length)
+						text.append(" ");
+				}
+				sentence = new Sentence((int) score, text.toString());
+				list.add(sentence);		        
+			    }
+		    	sc.close();    
 		} catch (Exception e) {
 			System.out.println(e);		
 		}		
