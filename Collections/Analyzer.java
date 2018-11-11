@@ -1,14 +1,23 @@
 import java.io.File;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Hashtable;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
 import java.util.Scanner;
 import java.util.Set;
-
+import java.util.StringTokenizer;
+import java.util.TreeSet;
 /*
  * SD2x Homework #3
  * Implement the methods below according to the specification in the assignment description.
  * Please be sure not to change the method signatures!
+
+
+
  */
 public class Analyzer {
 	
@@ -34,7 +43,7 @@ public class Analyzer {
 		    	String []str;
 		        str = line.split(" ");
 		        if (str.length < 4)
-		        	continue; // no text or no score (less then 4 element in array) why? idk but its ok for tests -_-		        
+		        	continue; // no text or no score (less then 4 element in array) why? idk but its ok for tests -_-
 		        double score = Double.parseDouble(str[0]);
 		        StringBuilder text = new StringBuilder();
 		        if (Math.abs(score) == 0 || 
@@ -53,7 +62,7 @@ public class Analyzer {
 		    }
 		    sc.close();    
 		} catch (Exception e) {
-			System.out.println(e);		
+			System.err.println(e);		
 		}		
 		return list; 
 
@@ -63,10 +72,44 @@ public class Analyzer {
 	 * Implement this method in Part 2
 	 */
 	public static Set<Word> allWords(List<Sentence> sentences) {
-
-		/* IMPLEMENT THIS METHOD! */
 		
-		return null; // this line is here only so this code will compile if you don't modify it
+		int endWordPosition = 0;
+		Set<Word> wordSet = new TreeSet<Word>();
+		Hashtable<String, Word> table = new Hashtable<String, Word>();
+		
+		if (sentences == null || sentences.isEmpty())		// If the input List of Sentences is null or is empty,
+			return wordSet;									// the allWords method should return an empty Set.		
+		for (Sentence s : sentences) {
+			if (s == null)		// If a Sentence object in the input List is null, 
+				continue;		// this method should ignore it and process the non-null Sentences.
+			StringTokenizer tokens = new StringTokenizer(s.text); // separate text into blocks (each block - 1 word)
+			while (tokens.hasMoreElements()) {
+				char []str = (tokens.nextToken().toLowerCase().toCharArray());
+				if (!Character.isAlphabetic(Integer.valueOf(str[0]))) // check first symbol in word
+					continue;										  // go to next word if symbol not a letter
+				
+				for (int i = 1; i < str.length; i++) {				 // iterate word. try to find not a letter
+					if (!Character.isAlphabetic(Integer.valueOf(str[i]))) {
+						endWordPosition = i;    // make boundary point  
+						break;
+					}
+				}
+				Word word = new Word(new String(str, 0, str.length - endWordPosition)); // make correct word and add to Word constructor
+				word.increaseTotal(s.score);
+				if (table.containsKey(word.text)) { // word in table!!
+					Word presentWord = table.get(word.text); // take from table
+					presentWord.increaseTotal(word.getTotal()); // and increase total
+					table.put(word.text, presentWord);			// change old value
+				} else {
+					table.put(word.text, word); // word not in table
+				}
+			}
+		}
+		Set<Entry<String, Word>> set = table.entrySet(); // convert from table to set
+		for (Entry<String, Word> entry : set) {
+			wordSet.add(entry.getValue());
+		}
+		return wordSet;
 
 	}
 	
@@ -74,10 +117,17 @@ public class Analyzer {
 	 * Implement this method in Part 3
 	 */
 	public static Map<String, Double> calculateScores(Set<Word> words) {
-
-		/* IMPLEMENT THIS METHOD! */
 		
-		return null; // this line is here only so this code will compile if you don't modify it
+		Map<String, Double> myMap = new HashMap<>();
+		
+		if (words == null || words.size() == 0)
+			return myMap;
+		for (Word word : words) {
+			if (word == null)
+				continue;
+			myMap.put(word.text, word.calculateScore());
+		}		
+		return myMap; // this line is here only so this code will compile if you don't modify it
 
 	}
 	
