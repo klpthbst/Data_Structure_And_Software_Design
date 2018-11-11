@@ -1,5 +1,6 @@
 import java.io.File;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.Hashtable;
 import java.util.List;
@@ -93,7 +94,7 @@ public class Analyzer {
 					}
 				}
 				Word word = new Word(new String(str, 0, str.length - endWordPosition)); // make correct word and add to Word constructor
-				endWordPosition = 0; // reset boundary
+				endWordPosition = 0;
 				word.increaseTotal(s.score);
 				if (table.containsKey(word.text)) { // word in table!!
 					Word presentWord = table.get(word.text); // take from table
@@ -134,11 +135,24 @@ public class Analyzer {
 	 * Implement this method in Part 4
 	 */
 	public static double calculateSentenceScore(Map<String, Double> wordScores, String sentence) {
-
-		/* IMPLEMENT THIS METHOD! */
 		
-		return 0; // this line is here only so this code will compile if you don't modify it
-
+		if (wordScores == null || wordScores.isEmpty() || sentence == null || sentence.isEmpty())
+			return 0;
+		double totalScore = 0;
+		int count = 0;
+		StringTokenizer tokens = new StringTokenizer(sentence);
+		while (tokens.hasMoreElements()) {
+			char []str = (tokens.nextToken().toLowerCase().toCharArray());
+			if (!Character.isAlphabetic(Integer.valueOf(str[0]))) // check first symbol in word
+				continue;										  // go to next word if symbol not a letter
+			
+			String w = new String(str);
+			if (wordScores.containsKey(w)) {
+				totalScore += wordScores.get(w);
+			}
+			count++;
+		}		
+		return count == 0 ? 0 : totalScore / count;
 	}
 	
 	/*
