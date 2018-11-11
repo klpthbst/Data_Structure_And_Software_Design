@@ -93,6 +93,7 @@ public class Analyzer {
 					}
 				}
 				Word word = new Word(new String(str, 0, str.length - endWordPosition)); // make correct word and add to Word constructor
+				endWordPosition = 0; // reset boundary
 				word.increaseTotal(s.score);
 				if (table.containsKey(word.text)) { // word in table!!
 					Word presentWord = table.get(word.text); // take from table
