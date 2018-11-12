@@ -135,8 +135,7 @@ public class BinarySearchTree<E extends Comparable<E>> {
 		} else if (val.compareTo(n.value) < 0) {
 			return findNode(n.leftChild, val);
 		}
-		return( n.value.equals(val) ? n : null); // this line is here only so this code will compile if you don't modify it
-		
+		return (n.value.equals(val) ? n : null);
 	}
 	
 	// Method #2.
