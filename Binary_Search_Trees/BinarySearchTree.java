@@ -120,7 +120,7 @@ public class BinarySearchTree<E extends Comparable<E>> {
 	public Node findNode(E val) {
 		
 		/* IMPLEMENT THIS METHOD! */
-		if (root == null)
+		if (root == null || val == null)
 			return null;
 		return findNode(root, val);
 		
@@ -128,7 +128,7 @@ public class BinarySearchTree<E extends Comparable<E>> {
 	}
 	
 	protected Node findNode(Node n, E val) {
-		if (n == null)
+		if (n == null || val == null)
 			return null;
 		if (val.compareTo(n.value) > 0) {
 			return findNode(n.rightChild, val);
