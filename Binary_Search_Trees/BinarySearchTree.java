@@ -117,14 +117,11 @@ public class BinarySearchTree<E extends Comparable<E>> {
 	
 	
 	// Method #1.
-	public Node findNode(E val) {
-		
+	public Node findNode(E val) {		
 		/* IMPLEMENT THIS METHOD! */
 		if (root == null || val == null)
 			return null;
 		return findNode(root, val);
-		
-
 	}
 	
 	protected Node findNode(Node n, E val) {
@@ -140,39 +137,49 @@ public class BinarySearchTree<E extends Comparable<E>> {
 	
 	// Method #2.
 	protected int depth(E val) {
-
 		/* IMPLEMENT THIS METHOD! */
-		
-		return -2; // this line is here only so this code will compile if you don't modify it
-
+		if (root == null || val == null || findNode(val) == null)
+			return -1;
+		return depth(root, val);
 	}
 	
-	// Method #3.
-	protected int height(E val) {
-
-		/* IMPLEMENT THIS METHOD! */
-		
-		return -2; // this line is here only so this code will compile if you don't modify it
-
+	private int depth(Node n, E val) {
+		if (n == null || val == null || findNode(val) == null)
+			return -1;
+		if (n.value.equals(val))
+			return 0;
+		else
+			return val.compareTo(n.value) > 0 ? 1 + depth(n.rightChild, val) : 1 + depth(n.leftChild, val);
 	}
 
+	// Method #3.
+	protected int height(E val) {
+		/* IMPLEMENT THIS METHOD! */
+		if (root == null || val == null || findNode(val) == null)
+			return -1;
+		return height(findNode(root, val));
+	}
+
+	private int height(Node n) {
+		if (n == null)
+			return -1;
+		if (n.leftChild == null && n.rightChild == null)
+			return 0;
+		return (1 + Math.max(height(n.leftChild), height(n.rightChild)));
+	}
 
 	// Method #4.
 	protected boolean isBalanced(Node n) {
-
 		/* IMPLEMENT THIS METHOD! */
-		
-		return true; // this line is here only so this code will compile if you don't modify it
-
+		if (n == null || findNode(n.value) == null)
+			return false;
+		int res = Math.abs(height(n.leftChild) - height(n.rightChild));
+		return res == 0 ? true : res == 1 ? true : false ;
 	}
 	
 	// Method #5. .
-	public boolean isBalanced() {
-
-		/* IMPLEMENT THIS METHOD! */
-		
-		return false; // this line is here only so this code will compile if you don't modify it
-
+	public boolean isBalanced() {	
+		return isBalanced(root.leftChild) && isBalanced(root.rightChild);
 	}
 
 }
