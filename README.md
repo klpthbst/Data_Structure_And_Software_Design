@@ -17,6 +17,8 @@ OpenJDK 64-Bit Server VM (build 10.0.2+13-Ubuntu-1ubuntu0.18.04.3, mixed mode)
 3. [Collections](https://github.com/klpthbst/Data_Structure_And_Software_Design/tree/master/Collections)
 4. [Binary_Search_Trees](https://github.com/klpthbst/Data_Structure_And_Software_Design/tree/master/Binary_Search_Trees)
 5. [TreeMaps_And_PriorityQueues](https://github.com/klpthbst/Data_Structure_And_Software_Design/tree/master/TreeMaps_And_PriorityQueues)
+6. [Graphs] #F*ck graphs
+7. [UML](https://github.com/klpthbst/Data_Structure_And_Software_Design/tree/master/UML)
 
 
 
